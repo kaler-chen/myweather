@@ -14,6 +14,9 @@ public class County extends DataSupport {
     private String countyCode;
     private String cityCode;
 
+    public County() {
+    }
+
     public County(int id, String countyName, String countyCode, String cityCode) {
         this.id = id;
         this.countyName = countyName;
