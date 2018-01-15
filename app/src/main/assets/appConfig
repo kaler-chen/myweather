@@ -1,0 +1,13 @@
+#APP参数配置文件
+#心知天气KEY
+#心知天气天气实况请求地址
+nowWeatherUrl=https://api.seniverse.com/v3/weather/now.json?key=#yourkey#&location=#location#&language=zh-Hans&unit=c
+#心知天气逐日天气预报和昨日天气请求地址
+dailyWeatherUrl=https://api.seniverse.com/v3/weather/daily.json?key=#yourkey#&location=#location#&language=zh-Hans&unit=c&start=-1&days=5
+#心知天气生活指数请求地址
+lifeIndexUrl=https://api.seniverse.com/v3/life/suggestion.json?key=#yourkey#&location=#location#&language=zh-Hans
+
+#必应地址
+bingUrl=https://cn.bing.com
+#获取必应每日一图地址
+bingPicUrl=https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1
