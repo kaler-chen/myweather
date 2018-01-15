@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class LogUtil {
 
-    private static int LOG_LEVEL = 2;
+    private static int LOG_LEVEL = 1;
     private static final int VERBOSE = 1;
     private static final int DEBUG = 2;
     private static final int INFO = 3;
@@ -24,25 +24,25 @@ public class LogUtil {
     }
 
     public static void d(String tag, String msg, Throwable tr){
-        if (LOG_LEVEL < DEBUG){
+        if (LOG_LEVEL <= DEBUG){
             Log.d(tag, msg, tr);
         }
     }
 
     public static void i(String tag, String msg, Throwable tr){
-        if (LOG_LEVEL < INFO){
+        if (LOG_LEVEL <= INFO){
             Log.i(tag, msg, tr);
         }
     }
 
     public static void w(String tag, String msg, Throwable tr){
-        if (LOG_LEVEL < WARNING){
+        if (LOG_LEVEL <= WARNING){
             Log.w(tag, msg, tr);
         }
     }
 
     public static void e(String tag, String msg, Throwable tr){
-        if (LOG_LEVEL < ERROR){
+        if (LOG_LEVEL <= ERROR){
             Log.e(tag, msg, tr);
         }
     }

@@ -8,6 +8,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.myweather.android.db.City;
 import com.myweather.android.db.County;
 import com.myweather.android.db.Province;
+import com.myweather.android.json.ForcastWeather;
+import com.myweather.android.json.LifeIndex;
+import com.myweather.android.json.NowWeather;
 
 /**
  * json解析工具
@@ -38,7 +41,7 @@ public class Utility {
                 }
                 return true;
             } catch (Exception e) {
-                LogUtil.e(TAG, e.getMessage(), e);
+                LogUtil.e(TAG, "解析省列表失败：" + e.getMessage(), e);
             }
         }
         return false;
@@ -65,7 +68,7 @@ public class Utility {
                 }
                 return true;
             } catch (Exception e) {
-                LogUtil.e(TAG, e.getMessage(), e);
+                LogUtil.e(TAG, "解析市列表：" + e.getMessage(), e);
             }
         }
         return false;
@@ -92,9 +95,100 @@ public class Utility {
                 }
                 return true;
             } catch (Exception e) {
-                LogUtil.e(TAG, e.getMessage(), e);
+                LogUtil.e(TAG, "解析县列表:" + e.getMessage(), e);
             }
         }
         return false;
     }
+
+    /**
+     * 解析天气实况数据
+     * @param response
+     * @return
+     */
+    public static NowWeather handleNowWeatherResponse(String response){
+        if (!TextUtils.isEmpty(response)){
+            try {
+                JSONObject responseObj = JSON.parseObject(response);
+                if(responseObj.containsKey("status_code")){
+                    LogUtil.w(TAG, "天气实况请求失败：" + responseObj.getString("status_code")
+                            + responseObj.getString("status"), null);
+                    return null;
+                }
+                JSONObject nowWeatherObj = responseObj.getJSONArray("results").getJSONObject(0);
+                NowWeather nowWeather = JSON.parseObject(nowWeatherObj.toString(), NowWeather.class);
+                return nowWeather;
+            } catch (Exception e) {
+                LogUtil.e(TAG, "解析天气实况数据失败：" + e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 解析天气预报数据
+     * @param response
+     * @return
+     */
+    public static ForcastWeather handleForcastWeatherResponse(String response){
+        if (!TextUtils.isEmpty(response)){
+            try {
+                JSONObject responseObj = JSON.parseObject(response);
+                if(responseObj.containsKey("status_code")){
+                    LogUtil.w(TAG, "天气预报请求失败：" + responseObj.getString("status_code")
+                            + responseObj.getString("status"), null);
+                    return null;
+                }
+                JSONObject forcastWeatherObj = responseObj.getJSONArray("results").getJSONObject(0);
+                ForcastWeather forcastWeather = JSON.parseObject(forcastWeatherObj.toString(), ForcastWeather.class);
+                return forcastWeather;
+            } catch (Exception e) {
+                LogUtil.e(TAG, "解析天气预报数据失败：" + e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 解析生活指数数据
+     * @param response
+     * @return
+     */
+    public static LifeIndex handleLifeIndexResponse(String response){
+        if (!TextUtils.isEmpty(response)){
+            try {
+                JSONObject responseObj = JSON.parseObject(response);
+                if(responseObj.containsKey("status_code")){
+                    LogUtil.w(TAG, "生活指数请求失败：" + responseObj.getString("status_code")
+                            + responseObj.getString("status"), null);
+                    return null;
+                }
+                JSONObject lifeIndexObj = responseObj.getJSONArray("results").getJSONObject(0);
+                LifeIndex lifeIndex = JSON.parseObject(lifeIndexObj.toString(), LifeIndex.class);
+                return lifeIndex;
+            } catch (Exception e) {
+                LogUtil.e(TAG, "解析生活指数数据失败：" + e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 解析Bing每日一图数据
+     * @param response
+     * @return
+     */
+    public static String handleBingPicResponse(String response){
+        if (!TextUtils.isEmpty(response)){
+            try {
+                JSONObject imgObj = JSON.parseObject(response).getJSONArray("images").getJSONObject(0);
+                String bingUrl = PropertyUtil.getProp(ConstUtil.BING_URL);
+                return bingUrl + imgObj.getString("url");
+            } catch (Exception e) {
+                LogUtil.e(TAG, "解析Bing每日一图数据失败：" + e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
 }
