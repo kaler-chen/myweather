@@ -3,7 +3,7 @@ package com.myweather.android.util;
 import android.util.Log;
 
 /**
- * TODO
+ * 日志工具类
  * Created by kaler-chen on 2018/1/14.
  * com.myweather.android.util
  */

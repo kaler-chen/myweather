@@ -32,7 +32,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- * TODO
+ * 选择城市
  * Created by kaler-chen on 2018/1/14.
  * com.myweather.android
  */

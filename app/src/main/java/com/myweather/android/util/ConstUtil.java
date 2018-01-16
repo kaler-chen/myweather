@@ -1,7 +1,7 @@
 package com.myweather.android.util;
 
 /**
- * TODO
+ * 常量工具类
  * Created by kaler-chen on 2018/1/15.
  * com.myweather.android.util
  */
@@ -21,4 +21,8 @@ public class ConstUtil {
     public static final String BING_PIC = "bing_pic";
     public static final String BING_PIC_URL = "bingPicUrl";
     public static final String BING_URL = "bingUrl";
+
+    public static final String AUTO_UPDATE = "autoUpdate";
+
+
 }

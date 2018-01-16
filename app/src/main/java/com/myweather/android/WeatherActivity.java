@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.bumptech.glide.util.LogTime;
 import com.myweather.android.json.ForcastWeather;
 import com.myweather.android.json.LifeIndex;
 import com.myweather.android.json.NowWeather;
+import com.myweather.android.service.AutoUpdateService;
 import com.myweather.android.util.ConstUtil;
 import com.myweather.android.util.HttpUtil;
 import com.myweather.android.util.LogUtil;
@@ -338,6 +340,12 @@ public class WeatherActivity extends AppCompatActivity {
         weatherInfoText.setText(weatherInfo);
         finishFlags[0] = true;
         showWeatherLayout();
+        //判断自动更新是否开启，若开启，则启动自动更新服务
+        String autoUpdate = PropertyUtil.getProp(ConstUtil.AUTO_UPDATE);
+        if (!TextUtils.isEmpty(autoUpdate) && autoUpdate.equalsIgnoreCase("on")){
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
+        }
     }
 
     private void showLifeIndexInfo(LifeIndex lifeIndex) {
