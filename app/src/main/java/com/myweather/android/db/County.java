@@ -13,15 +13,17 @@ public class County extends DataSupport {
     private String countyName;
     private String countyCode;
     private String cityCode;
+    private String countyLevel;
 
     public County() {
     }
 
-    public County(int id, String countyName, String countyCode, String cityCode) {
+    public County(int id, String countyName, String countyCode, String cityCode, String countyLevel) {
         this.id = id;
         this.countyName = countyName;
         this.countyCode = countyCode;
         this.cityCode = cityCode;
+        this.countyLevel = countyLevel;
     }
 
     public int getId() {
@@ -54,5 +56,13 @@ public class County extends DataSupport {
 
     public void setCityCode(String cityCode) {
         this.cityCode = cityCode;
+    }
+
+    public String getCountyLevel() {
+        return countyLevel;
+    }
+
+    public void setCountyLevel(String countyLevel) {
+        this.countyLevel = countyLevel;
     }
 }

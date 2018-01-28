@@ -1,16 +1,15 @@
 package com.myweather.android;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -24,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.util.LogTime;
+import com.myweather.android.base.BaseActivity;
 import com.myweather.android.json.ForcastWeather;
 import com.myweather.android.json.LifeIndex;
 import com.myweather.android.json.NowWeather;
@@ -40,7 +40,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends BaseActivity {
 
     private static final String TAG = "WeatherActivity";
 
@@ -63,6 +63,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     private boolean[] finishFlags;
     public boolean[] refreshFlags;
+    private String locationName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,7 @@ public class WeatherActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String nowWeatherString = sharedPreferences.getString(ConstUtil.NOW_WEATHER, null);
-        String locationName;
+//        String locationName;
         LogUtil.d(TAG, "nowWeatherString=" + nowWeatherString, null);
         if (nowWeatherString != null){
             NowWeather nowWeather = Utility.handleNowWeatherResponse(nowWeatherString);
@@ -140,11 +141,10 @@ public class WeatherActivity extends AppCompatActivity {
             weatherLayout.setVisibility(View.INVISIBLE);
             requestLifeIndex(locationName);
         }
-        final String finalLocationName = locationName;
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshWeatherInfo(finalLocationName);
+                refreshWeatherInfo(locationName);
             }
         });
 
@@ -159,6 +159,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     public void refreshWeatherInfo(String locationName){
         refreshFlags = new boolean[]{false, false, false};
+        this.locationName = locationName;
         requestNowWeather(locationName);
         requestForcastWeather(locationName);
         requestLifeIndex(locationName);

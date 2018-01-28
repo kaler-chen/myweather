@@ -13,15 +13,17 @@ public class City extends DataSupport {
     private String cityName;
     private String cityCode;
     private String provinceCode;
+    private String cityLevel;
 
     public City() {
     }
 
-    public City(int id, String cityName, String cityCode, String provinceCode) {
+    public City(int id, String cityName, String cityCode, String provinceCode, String cityLevel) {
         this.id = id;
         this.cityName = cityName;
         this.cityCode = cityCode;
         this.provinceCode = provinceCode;
+        this.cityLevel = cityLevel;
     }
 
     public int getId() {
@@ -54,5 +56,13 @@ public class City extends DataSupport {
 
     public void setProvinceCode(String provinceCode) {
         this.provinceCode = provinceCode;
+    }
+
+    public String getCityLevel() {
+        return cityLevel;
+    }
+
+    public void setCityLevel(String cityLevel) {
+        this.cityLevel = cityLevel;
     }
 }

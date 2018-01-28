@@ -24,5 +24,11 @@ public class ConstUtil {
 
     public static final String AUTO_UPDATE = "autoUpdate";
 
+    public static final String LOAD_AREAINFO_FLAG = "loadAreaInfoFlag";
+
+    public static final String AREA_LEVEL = "areaLevel";
+    public static final String PROVINCE = "province";
+    public static final String CITY = "city";
+    public static final String COUNTY = "county";
 
 }
